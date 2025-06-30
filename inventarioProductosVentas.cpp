@@ -60,7 +60,33 @@ void buscarProducto(Producto producto[], int contProducto){
 }
 
 void actualizarProducto(Producto producto[], int contProducto){
+    string nombreProducto;
+    cout << "\nIngrese el nombre del producto a actualizar:" << endl;
+    cin.ignore();
+    getline(cin, nombreProducto);
 
+    for (int i = 0; i < contProducto; i++){
+        if (producto[i].nombre == nombreProducto){
+            cout << "\nProducto encontrado:" << endl;
+            cout << "Nombre: " << producto[i].nombre << endl;
+            cout << "Precio: " << producto[i].precio << endl;
+
+            cout << "\nIngrese el nuevo nombre del producto:" << endl;
+            getline(cin, producto[i].nombre);
+            cout << "Ingrese el nuevo precio del producto:" << endl;
+            cin >> producto[i].precio;
+
+            while (cin.fail()){
+                cout << "Error: ingrese un número válido y mayor a 0:" << endl;
+                cin.clear();
+                cin.ignore(1000, '\n');
+                cin >> producto[i].precio;
+            }
+            cout << "\nProducto actualizado con éxito." << endl;
+            return;
+        }
+    }
+    cout << "Producto no encontrado." << endl;
 }
 
 void eliminarProducto(){
