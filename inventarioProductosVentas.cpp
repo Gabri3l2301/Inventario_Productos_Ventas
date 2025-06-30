@@ -162,8 +162,12 @@ void listarVentas(Venta venta[], int contVenta){
     }
 }
 
-void calcularTotalVentas(){
-
+void calcularTotalVentas(Venta venta[], int contVenta){
+    float total = 0;
+    for (int i = 0; i < contVenta; i++){
+        total += venta[i].precioTotal;
+    }
+    cout << "\nTotal de ventas realizadas: " << total << endl;
 }
 
 void menu(){
@@ -219,7 +223,7 @@ void menu(){
             listarVentas(venta, contadorVentas);
             break;
         case 'H':
-            calcularTotalVentas();
+            calcularTotalVentas(venta, contadorVentas);
             break;
         case 'S':
             cout << "\nSaliendo del programa..." << endl;
