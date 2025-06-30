@@ -26,8 +26,13 @@ void registrarProducto(Producto producto[], int &contProducto){
     contProducto++;
 }
 
-void listarProductos(){
-
+void listarProductos(Producto producto[], int contProducto){
+    cout << "\nLos productos listados son:" << endl;
+    for (int i = 0; i < contProducto; i++){
+        cout << "\nProducto " << i + 1 << endl;
+        cout << "Nombre: " << producto[i].nombre << endl;
+        cout << "Precio: " << producto[i].precio << endl;
+    }
 }
 
 void buscarProducto(){
@@ -88,7 +93,7 @@ void menu(){
             registrarProducto(producto, contadorProductos);
             break;
         case 'B':
-            listarProductos();
+            listarProductos(producto, contadorProductos);
             break;
         case 'C':
             buscarProducto();
