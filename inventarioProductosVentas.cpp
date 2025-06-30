@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <windows.h>
 using namespace std;
 
@@ -14,9 +15,17 @@ struct Venta{
     float precioTotal;
 };
 
-void registrarProducto(){
+void registrarProducto(Producto producto[], int &contProducto){
+    cout << "\nIngrese el nombre del producto número " << contProducto + 1 << ":" << endl;
+    cin.ignore();
+    getline(cin, producto[contProducto].nombre);
 
+    cout << "Ingrese el precio del producto:" << endl;
+    cin >> producto[contProducto].precio;
+
+    contProducto++;
 }
+
 void listarProductos(){
 
 }
@@ -47,9 +56,15 @@ void calcularTotalVentas(){
 
 void menu(){
     SetConsoleOutputCP(CP_UTF8);
-    int opcion;
+    const int MAX_PRODUCTOS = 100;
+    const int MAX_VENTAS = 100;
+    Producto producto[MAX_PRODUCTOS];
+    Venta venta[MAX_VENTAS];
+    int contadorProductos = 0;
+    char opcion;
+
     do{
-        cout << "===== MENÚ PRINCIPAL =====";
+        cout << "===== MENÚ PRINCIPAL =====\n";
         cout << "A: Registrar un nuevo producto\n";
         cout << "B: Listar los productos registrados\n";
         cout << "C: Buscar un producto por nombre\n";
@@ -65,7 +80,9 @@ void menu(){
 
         switch (opcion){
         case 'A':
-            registrarProducto();
+            registrarProducto(producto, contadorProductos);
+            system("PAUSE");
+            system("cls");
             break;
         case 'B':
             listarProductos();
