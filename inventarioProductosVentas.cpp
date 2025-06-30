@@ -148,7 +148,18 @@ void registrarVenta(Venta venta[], int &contVenta, Producto producto[], int cont
 }
 
 void listarVentas(Venta venta[], int contVenta){
+    if (contVenta == 0){
+        cout << "\nNo hay ventas registradas." << endl;
+        return;
+    }
 
+    cout << "\nVentas realizadas:" << endl;
+    for (int i = 0; i < contVenta; i++){
+        cout << "\nVenta ID: " << venta[i].idVenta << endl;
+        cout << "Producto: " << venta[i].producto << endl;
+        cout << "Cantidad: " << venta[i].cantidad << endl;
+        cout << "Precio Total: " << venta[i].precioTotal << endl;
+    }
 }
 
 void calcularTotalVentas(){
