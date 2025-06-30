@@ -62,6 +62,7 @@ void menu(){
     Venta venta[MAX_VENTAS];
     int contadorProductos = 0;
     char opcion;
+    string opcionString;
 
     do{
         cout << "===== MENÚ PRINCIPAL =====\n";
@@ -75,14 +76,16 @@ void menu(){
         cout << "H: Calcular el total de ventas realizadas\n";
         cout << "S: Salir del programa\n";
         cout << "Seleccione una opción: ";
-        cin >> opcion;
-        opcion = toupper(opcion);
+        cin >> opcionString;
+        if(opcionString.length() != 1){
+            opcion = 'X';
+        }else{
+            opcion = toupper(opcionString[0]);
+        }
 
         switch (opcion){
         case 'A':
             registrarProducto(producto, contadorProductos);
-            system("PAUSE");
-            system("cls");
             break;
         case 'B':
             listarProductos();
@@ -106,11 +109,15 @@ void menu(){
             calcularTotalVentas();
             break;
         case 'S':
-            cout << "Saliendo del programa..." << endl;
+            cout << "\nSaliendo del programa..." << endl;
             break;
         default:
-            cout << "Error, ingresa una opción válida..." << endl;
+            cout << "\nError, ingresa una opción válida..." << endl;
             break;
+        }
+        if (opcion != 'S'){
+            system("PAUSE");
+            system("cls");
         }
     }while (opcion != 'S');
 }
