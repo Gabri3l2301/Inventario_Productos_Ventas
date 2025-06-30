@@ -108,11 +108,46 @@ void eliminarProducto(Producto producto[], int &contProducto){
     cout << "Producto no encontrado." << endl;
 }
 
-void registrarVenta(){
+void registrarVenta(Venta venta[], int &contVenta, Producto producto[], int contProducto){
+    if (contProducto == 0){
+        cout << "\nNo hay productos disponibles para vender." << endl;
+        return;
+    }
 
+    cout << "\nIngrese el ID de la venta:" << endl;
+    cin >> venta[contVenta].idVenta;
+
+    cout << "\nIngrese el nombre del producto vendido:" << endl;
+    cin.ignore();
+    getline(cin, venta[contVenta].producto);
+
+    cout << "\nIngrese la cantidad vendida:" << endl;
+    cin >> venta[contVenta].cantidad;
+    while (cin.fail() || venta[contVenta].cantidad <= 0){
+        cout << "Error: ingrese una cantidad válida y mayor a 0:" << endl;
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cin >> venta[contVenta].cantidad;
+    }
+
+    bool encontrado = false;
+    for (int i = 0; i < contProducto; i++){
+        if (producto[i].nombre == venta[contVenta].producto){
+            venta[contVenta].precioTotal = producto[i].precio * venta[contVenta].cantidad;
+            contVenta++;
+            encontrado = true;
+            break;
+        }
+    }
+
+    if (encontrado) {
+        cout << "\nVenta registrada con éxito." << endl;
+    } else {
+        cout << "Producto no encontrado en el inventario." << endl;
+    }
 }
 
-void listarVentas(){
+void listarVentas(Venta venta[], int contVenta){
 
 }
 
@@ -127,6 +162,7 @@ void menu(){
     Producto producto[MAX_PRODUCTOS];
     Venta venta[MAX_VENTAS];
     int contadorProductos = 0;
+    int contadorVentas = 0;
     char opcion;
     string opcionString;
 
@@ -166,10 +202,10 @@ void menu(){
             eliminarProducto(producto, contadorProductos);
             break;
         case 'F':
-            registrarVenta();
+            registrarVenta(venta, contadorVentas, producto, contadorProductos);
             break;
         case 'G':
-            listarVentas();
+            listarVentas(venta, contadorVentas);
             break;
         case 'H':
             calcularTotalVentas();
