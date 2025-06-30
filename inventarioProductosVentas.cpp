@@ -23,6 +23,12 @@ void registrarProducto(Producto producto[], int &contProducto){
     cout << "Ingrese el precio del producto:" << endl;
     cin >> producto[contProducto].precio;
 
+    while (cin.fail()){
+        cout << "Error: ingrese un número válido y mayor a 0:" << endl;
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cin >> producto[contProducto].precio;
+    }
     contProducto++;
 }
 
