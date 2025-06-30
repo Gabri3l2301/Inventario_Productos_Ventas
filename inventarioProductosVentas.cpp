@@ -89,8 +89,23 @@ void actualizarProducto(Producto producto[], int contProducto){
     cout << "Producto no encontrado." << endl;
 }
 
-void eliminarProducto(){
+void eliminarProducto(Producto producto[], int &contProducto){
+    string nombreProducto;
+    cout << "\nIngrese el nombre del producto a eliminar:" << endl;
+    cin.ignore();
+    getline(cin, nombreProducto);
 
+    for (int i = 0; i < contProducto; i++){
+        if (producto[i].nombre == nombreProducto){
+            for (int j = i; j < contProducto - 1; j++){
+                producto[j] = producto[j + 1];
+            }
+            contProducto--;
+            cout << "\nProducto eliminado con éxito." << endl;
+            return;
+        }
+    }
+    cout << "Producto no encontrado." << endl;
 }
 
 void registrarVenta(){
@@ -148,7 +163,7 @@ void menu(){
             actualizarProducto(producto, contadorProductos);
             break;
         case 'E':
-            eliminarProducto();
+            eliminarProducto(producto, contadorProductos);
             break;
         case 'F':
             registrarVenta();
