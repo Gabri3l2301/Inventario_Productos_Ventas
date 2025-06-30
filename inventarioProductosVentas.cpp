@@ -41,11 +41,25 @@ void listarProductos(Producto producto[], int contProducto){
     }
 }
 
-void buscarProducto(){
+void buscarProducto(Producto producto[], int contProducto){
+    string nombreProducto;
+    cout << "\nIngrese el nombre del producto a buscar:" << endl;
+    cin.ignore();
+    getline(cin, nombreProducto);
 
+    for (int i = 0; i < contProducto; i++){
+        if (producto[i].nombre == nombreProducto){
+            cout << "\nProducto encontrado:" << endl;
+            cout << "Nombre: " << producto[i].nombre << endl;
+            cout << "Precio: " << producto[i].precio << endl;
+            return;
+        }else{
+            cout << "Producto no encontrado." << endl;
+        }
+    }
 }
 
-void actualizarProducto(){
+void actualizarProducto(Producto producto[], int contProducto){
 
 }
 
@@ -102,10 +116,10 @@ void menu(){
             listarProductos(producto, contadorProductos);
             break;
         case 'C':
-            buscarProducto();
+            buscarProducto(producto, contadorProductos);
             break;
         case 'D':
-            actualizarProducto();
+            actualizarProducto(producto, contadorProductos);
             break;
         case 'E':
             eliminarProducto();
